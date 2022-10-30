@@ -1,0 +1,13 @@
+﻿1. Wyświetlić planszę powitalną (powitanie, zasady itd ..)
+2. Tworzymy baze pytań
+3. Ustawiamy aktualną kategorię na najniższą (100 pkt)
+4. Wylosuj pytanie z aktualnej kategorii.
+5. Wyświetl pytanie graczowi.
+6. Pobieramy odpowiedz od gracza.
+7. Walidacja odpowiedzi gracza.
+	=> ŹLE 8. Plansza Error => GAME OVER
+	=> DOBRZE 8.Plansza DOBRA ODPOWIEDŹ
+	9. Sprawdzamy czy to nie było ostatnie pytanie
+	=> TAK => SUPER GRATULACJE => GAME OVER
+	=> NIE => 10. Podnieść kategorię na wyższą
+	11.Wracamy do pkt 4.
