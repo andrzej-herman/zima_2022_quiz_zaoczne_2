@@ -1,7 +1,7 @@
-﻿1. Wyświetlić planszę powitalną (powitanie, zasady itd ..)
-2. Tworzymy baze pytań
-3. Ustawiamy aktualną kategorię na najniższą (100 pkt)
-4. Wylosuj pytanie z aktualnej kategorii.
+﻿1. Wyświetlić planszę powitalną (powitanie, zasady itd ..) => OK
+2. Tworzymy baze pytań => OK.
+3. Ustawiamy aktualną kategorię na najniższą (100 pkt) => OK.
+4. Wylosuj pytanie z aktualnej kategorii. => OK
 5. Wyświetl pytanie graczowi.
 6. Pobieramy odpowiedz od gracza.
 7. Walidacja odpowiedzi gracza.
