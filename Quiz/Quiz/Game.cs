@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,67 +9,64 @@ namespace Quiz
 {
     public class Game
     {
+        // 100, 200, 300, 400, 500, 750, 1000
+
+        // zacząć od ustawienia listy kategorii
+        // sprawdzamy czy można podnieść kategorię, jeśli tak to ją podnosimy
+        // jesli nie to oznacza, że to było ostatnie pytanie 
+
         public Game()
         {
-            CreateQuestions();
-            CurrentCategory= 100;
+            CreateAllQuestions();
+            CurrentCategory = 100;
+            Random = new Random();
         }
-       
-        public List<Question> AllQuestions { get; set; }
+
         public int CurrentCategory { get; set; }
+        public List<Question> Questions { get; set; }
         public Question CurrentQuestion { get; set; }
+        public Random Random { get; set; }
 
-        public void CreateQuestions()
+        private void CreateAllQuestions()
         {
-            AllQuestions = new List<Question>();
-            var q = new Question()
-            {
-                Id = 1,
-                Category = 100,
-                Content = "Jak miał na imię Einstein?",
-            };
-
-            var a1 = new Answer()
-            {
-                Id = 1,
-                Content = "Albert",
-                IsCorrect= true
-            };
-            q.Answers.Add(a1);
-
-            var a2 = new Answer()
-            {
-                Id = 2,
-                Content = "Aaron",
-                IsCorrect = false
-            };
-
-            q.Answers.Add(a2);
-
-            var a3 = new Answer()
-            {
-                Id = 3,
-                Content = "Anthony",
-                IsCorrect = false
-            };
-
-            q.Answers.Add(a3);
-
-            var a4 = new Answer()
-            {
-                Id = 4,
-                Content = "Basia",
-                IsCorrect = false
-            };
-
-            q.Answers.Add(a4);
-            AllQuestions.Add(q);
-
+            var path =  Directory.GetCurrentDirectory() + "\\questions.json";
+            var text = File.ReadAllText(path);
+            Questions = JsonConvert.DeserializeObject<List<Question>>(text);
         }
 
-        public void GetQuestionFromCategory()
+        public void GetQuestion()
         {
-            CurrentQuestion = AllQuestions[0];
+            // wybieramy tylko pytania o wartości CurrentCategory
+            var questionsCat = Questions.Where(x => x.Category == CurrentCategory).ToList();
+
+            // losujemy liczbę
+            var number = Random.Next(0, questionsCat.Count);
+
+            // wybieramy pytanie z listy na podstawie wylosowanej liczby
+            var question = questionsCat[number];
+
+            // sortujemy losowo kolejnośc odpowiedzi na wylosowane pytanie
+            question.Answers = question.Answers.OrderBy(x => Random.Next()).ToList();
+
+            // zapisujemy wartości ShowOrder (od 1 do 4)
+            var index = 1;
+            foreach (var answer in question.Answers)
+            {
+                answer.ShowOrder = index;
+                index++;
+            }
+            
+            CurrentQuestion = question;
         }
+
+        // sprawdzanie poprawności odpowiedzi gracza
+        public bool CheckPlayerAnswer(int playerNumber)
+        {
+            // wybieramy odpowiedź na ppodstawie podanej wartosci = wiedząc że to jest ShowOrder
+            var answer = CurrentQuestion.Answers.FirstOrDefault(x => x.ShowOrder == playerNumber);
+            return answer.IsCorrect;
+        }
+
+
     }
 }

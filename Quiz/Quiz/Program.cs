@@ -1,9 +1,32 @@
 ﻿using Quiz;
+
+// tworzenie obiektu typu Gra
 var game = new Game();
-var messages = new Messages();
-messages.DisplayWelcomeScreen();
-game.GetQuestionFromCategory();
-var question = game.CurrentQuestion;
-// napisać metodę służącą do wyświetlanie pytania
-// instrukcja if,
-// pętle for, foreach, while
+
+// tworzenie obiektu typu Message
+var message = new Message();
+
+// wyświetlanie powitania
+message.DisplayWelcomeScreen();
+
+// losowanie pytania
+game.GetQuestion();
+
+// wyświetlanie pytania i pobieramy odpowiedź gracza
+int playerAnswer = game.CurrentQuestion.Display();
+
+// sprawdzamy poprawność odpowiedzi
+bool correct = game.CheckPlayerAnswer(playerAnswer);
+
+if (correct)
+{
+    // HURRA
+}
+else
+{
+    message.DisplayFailAndGameOver();
+}
+
+
+
+

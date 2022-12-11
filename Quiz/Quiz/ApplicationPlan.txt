@@ -1,13 +1,38 @@
-﻿1. Wyświetlić planszę powitalną (powitanie, zasady itd ..) => OK
-2. Tworzymy baze pytań => OK.
-3. Ustawiamy aktualną kategorię na najniższą (100 pkt) => OK.
-4. Wylosuj pytanie z aktualnej kategorii. => OK
-5. Wyświetl pytanie graczowi.
-6. Pobieramy odpowiedz od gracza.
-7. Walidacja odpowiedzi gracza.
-	=> ŹLE 8. Plansza Error => GAME OVER
-	=> DOBRZE 8.Plansza DOBRA ODPOWIEDŹ
-	9. Sprawdzamy czy to nie było ostatnie pytanie
-	=> TAK => SUPER GRATULACJE => GAME OVER
-	=> NIE => 10. Podnieść kategorię na wyższą
-	11.Wracamy do pkt 4.
+﻿1. Wyświetl ekran powitalny (powitanie, zasady etc...) => OK
+2. Ustaw aktualną kategorię gry na najniższą (100 pkt) => OK
+3. Utwórz bazę pytań => OK
+4. Wylosuj pytanie z aktualnej kategorii => OK
+5. Wyświetl wylosowane pytanie => OK
+6. Pobierz odpowiedź od gracza => OK
+7. Walidacja odpowiedzi gracza. => OK
+=> ŹLE => 8. PLANSZA GAME OVER => OK
+=> DOBRZE => 
+	8. Sprawdzamy czy to nie było ostatnie pytanie
+	=> TAK => 9. HURRA WYGRAŁEŚ/ĄŚ QUIZ = > GAME OVER
+	=> NIE 9. BRAWO TO DOBRA ODPOWIEDŹ
+	10. Zwiększamy kategorię na nastepna
+	11. Wracamy do pkt 4
+
+
+
+
+	------------------------------------------------------------
+
+
+	var numbers = new List<int>();
+numbers.Add(45);
+numbers.Add(4);
+numbers.Add(231);
+numbers.Add(91);
+numbers.Add(56);
+numbers.Add(102);
+numbers.Add(11);
+foreach (var item in numbers)
+{
+    Console.WriteLine(item);
+}
+Console.WriteLine();
+Console.WriteLine();
+
+var choosen = numbers.FirstOrDefault(x => x > 10000);
+Console.WriteLine(choosen);
