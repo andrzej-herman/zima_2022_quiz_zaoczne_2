@@ -18,14 +18,24 @@ namespace Quiz
         public Game()
         {
             CreateAllQuestions();
-            CurrentCategory = 100;
+           
             Random = new Random();
+            //Categories = new List<int> { 100, 200, 300, 400, 500, 750, 1000 };
+            Categories = Questions
+                .Select(x => x.Category)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            CurrentCategory = Categories[CurrentCategoryIndex];
         }
 
         public int CurrentCategory { get; set; }
         public List<Question> Questions { get; set; }
         public Question CurrentQuestion { get; set; }
         public Random Random { get; set; }
+        public List<int> Categories { get; set; }
+        public int CurrentCategoryIndex { get; set; }
 
         private void CreateAllQuestions()
         {
@@ -68,5 +78,18 @@ namespace Quiz
         }
 
 
+        public bool IsLastCategory()
+        {
+            // jeżeli to była ostatnia kategoria to zwarcamy true;
+            // a jeżeli nie to podnosimy kategorię na następną i zwaracamy false
+            if (CurrentCategoryIndex < Categories.Count - 1)
+            {
+                CurrentCategoryIndex++;
+                CurrentCategory = Categories[CurrentCategoryIndex];
+                return false;
+            }
+
+            return true;
+        }
     }
 }
